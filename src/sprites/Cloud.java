@@ -6,6 +6,7 @@
 package sprites;
 
 import gameengine.Sprite;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
@@ -24,8 +25,13 @@ public class Cloud extends Sprite {
         krug2.setFill(Color.WHITE);
         krug3.setFill(Color.WHITE);
 
-        getChildren().addAll(krug1, krug2, krug3);
-        
+        IvLogo ivLogo = new IvLogo();
+        ivLogo.setRotate(180);
+        ivLogo.setTranslateX(-200);
+        ivLogo.setTranslateY(-200);
+
+        getChildren().addAll(krug1, krug2, krug3, ivLogo);
+
         this.setRotate(180);//da ne budi miki nego oblak
 
     }

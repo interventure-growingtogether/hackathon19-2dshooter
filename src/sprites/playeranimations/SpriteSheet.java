@@ -21,6 +21,7 @@ public class SpriteSheet {
     private static Image ORC_IMAGE = new Image("spritesheet/Orc.png");
     private static Image BG_IMAGE = new Image("spritesheet/bg.jpg");
     private static Image DRAGON_IMAGE = new Image("spritesheet/dragon.png");
+    private static Image IV_LOGO_TRANS = new Image("spritesheet/iv-logo-transparent.png");
 
     static public Image getImage() {
         return makeTransparent(KNIGHT_BLUE_IMAGE);
@@ -40,6 +41,10 @@ public class SpriteSheet {
     
     static public Image getDragonImage() {
         return DRAGON_IMAGE;
+    }
+
+    static public Image getInterVentureLogo() {
+        return IV_LOGO_TRANS;
     }
 
     static private Image makeTransparent(Image inputImage) {
