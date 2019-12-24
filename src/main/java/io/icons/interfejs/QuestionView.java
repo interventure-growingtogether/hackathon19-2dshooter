@@ -5,6 +5,11 @@
  */
 package io.icons.interfejs;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
 import io.icons.PlatformerGame;
 import io.icons.repository.Answer;
 import io.icons.repository.Question;
@@ -13,11 +18,6 @@ import javafx.application.Platform;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @author Marko
@@ -96,8 +96,8 @@ public class QuestionView extends DialogView {
 
         double height = textField.getBoundsInLocal().getHeight();
         double offset = textFields.isEmpty()
-                ? height - (getLayoutBounds().getHeight() / 2)
-                : offsetJustBelowLastTextField();
+            ? 5 + height / 2 - (getLayoutBounds().getHeight() / 2)
+            : offsetJustBelowLastTextField();
         textField.setTranslateY(offset);
         textField.setTranslateX(-textField.getBoundsInLocal().getWidth() / 2);
         return textField;
