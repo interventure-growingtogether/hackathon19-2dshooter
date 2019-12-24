@@ -8,6 +8,7 @@ package io.icons.interfejs;
 import io.icons.PlatformerGame;
 import io.icons.repository.Answer;
 import io.icons.repository.Question;
+import io.icons.util.StringUtils;
 import javafx.application.Platform;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -83,8 +84,9 @@ public class QuestionView extends DialogView {
     }
 
     private Text createTextField(final String textContent, Color fill, Color stroke) {
+
         Text textField = new Text();
-        textField.setText(textContent);
+        textField.setText(StringUtils.asFixedLengthLines(textContent));
 
         textField.setFont(Font.font("Verdana", 36));
         textField.setFill(fill);

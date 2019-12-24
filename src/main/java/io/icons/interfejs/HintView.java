@@ -7,9 +7,11 @@ package io.icons.interfejs;
 
 import io.icons.PlatformerGame;
 import io.icons.repository.QuestionRepository;
+import io.icons.util.StringUtils;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.util.Pair;
 
 import java.util.Collections;
 import java.util.LinkedList;
@@ -21,18 +23,18 @@ import java.util.stream.Collectors;
  */
 public class HintView extends DialogView {
 
-    private static final LinkedList<String> HINTS;
+    private static final LinkedList<Pair<String, String>> HINTS;
 
     static {
         QuestionRepository repository = QuestionRepository.buildRepository();
         HINTS = repository.getQuestions().stream()
-            .map(q -> q.getName() + "\n" + q.getCorrectAnswer().getName())
-            .collect(Collectors.toCollection(LinkedList::new));
+                .map(q -> new Pair<>(q.getName(), q.getHint()))
+                .collect(Collectors.toCollection(LinkedList::new));
         Collections.shuffle(HINTS);
     }
 
     Text hintTextField;
-    private String hintText;
+    private Pair<String, String> hint;
 
     public static void showIn(PlatformerGame game) {
         if (!HINTS.isEmpty()) {
@@ -40,20 +42,20 @@ public class HintView extends DialogView {
         }
     }
 
-    public HintView(final PlatformerGame pg, String hintText) {
+    public HintView(final PlatformerGame pg, Pair<String, String> hint) {
         super(pg);
-        this.hintText = hintText;
+        this.hint = hint;
 
         pg.setPaused(true);
         initHintTextField();
 
         this.setOnMouseClicked(e -> closeDialog());
-        POOL.schedule(this::closeDialog, 2500, TimeUnit.MILLISECONDS);
+        POOL.schedule(this::closeDialog, 5, TimeUnit.SECONDS);
     }
 
     private void initHintTextField() {
         this.hintTextField = new Text();
-        this.hintTextField.setText(hintText);
+        this.hintTextField.setText(hintText());
 
         this.hintTextField.setFont(Font.font("Verdana", 36));
         this.hintTextField.setFill(Color.WHITE);
@@ -66,7 +68,14 @@ public class HintView extends DialogView {
         getChildren().add(this.hintTextField);
     }
 
-    @Override protected void additionalCloseOperations() {
+    private String hintText() {
+        return StringUtils.asFixedLengthLines(hint.getKey())
+                + "\n\n" +
+                StringUtils.asFixedLengthLines(hint.getValue());
+    }
+
+    @Override
+    protected void additionalCloseOperations() {
         POOL.schedule(() -> pg.setPaused(false), 200, TimeUnit.MILLISECONDS);
     }
 }
