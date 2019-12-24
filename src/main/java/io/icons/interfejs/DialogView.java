@@ -12,6 +12,8 @@ import io.icons.sprites.playeranimations.SpriteSheet;
 
 public class DialogView extends Group {
     public static final ScheduledExecutorService POOL;
+    public static final int WIDTH = 700;
+    public static final int HEIGHT = 500;
 
     static {
         POOL = Executors.newScheduledThreadPool(4);
@@ -25,14 +27,15 @@ public class DialogView extends Group {
         this.pg = pg;
 
         final ImageView iv = new ImageView(SpriteSheet.getBgImage());
-        iv.setViewport(new Rectangle2D(0, 0, 700, 366));
-        iv.setTranslateX(-700 / 2);
-        iv.setTranslateY(-366 / 2);
+        iv.setViewport(new Rectangle2D(0, 0, WIDTH, HEIGHT));
+        iv.setTranslateX(-WIDTH / 2);
+        iv.setTranslateY(-HEIGHT / 2);
         iv.setOpacity(0.99999);
 
-        getChildren().add(iv);
         setTranslateX(0.5);
         setTranslateY(0.5);
+
+        getChildren().add(iv);
 
         setTranslateX(pg.getScene().getWidth() / 2);
         setTranslateY(pg.getScene().getHeight() / 2);

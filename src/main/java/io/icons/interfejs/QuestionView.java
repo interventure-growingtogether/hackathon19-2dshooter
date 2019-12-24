@@ -38,7 +38,10 @@ public class QuestionView extends DialogView {
         this.question = question;
         this.onClose = onClose;
 
-        initTextField(question.getName());
+        Text questionText = createTextField(question.getName(), Color.BLUEVIOLET, Color.YELLOW);
+        textFields.add(questionText);
+        getChildren().add(questionText);
+
         List<Answer> answers = new ArrayList<>(question.getAnswers());
         Collections.shuffle(answers);
         answers.stream().map(Answer::getName).forEach(this::initTextField);
@@ -50,6 +53,8 @@ public class QuestionView extends DialogView {
         Text textField = createTextField(textContent, Color.WHITE, Color.BLUE);
         getChildren().add(textField);
 
+        textField.setOnMouseEntered(e -> textField.setUnderline(true));
+        textField.setOnMouseExited(e -> textField.setUnderline(false));
         textField.setOnMouseClicked(e -> {
             if (!answersLocked) {
                 answersLocked = true;
@@ -88,12 +93,24 @@ public class QuestionView extends DialogView {
         textField.setStrokeWidth(1);
 
         double height = textField.getBoundsInLocal().getHeight();
-        textField.setTranslateY((textFields.size() - 2.5) * height);
+        double offset = textFields.isEmpty()
+                ? height - (getLayoutBounds().getHeight() / 2)
+                : offsetJustBelowLastTextField();
+        textField.setTranslateY(offset);
         textField.setTranslateX(-textField.getBoundsInLocal().getWidth() / 2);
         return textField;
     }
 
-    @Override protected void additionalCloseOperations() {
+    private double offsetJustBelowLastTextField() {
+        return lastTextField().getLocalToParentTransform().getTy() + lastTextField().getBoundsInLocal().getHeight() + 10;
+    }
+
+    private Text lastTextField() {
+        return textFields.get(textFields.size() - 1);
+    }
+
+    @Override
+    protected void additionalCloseOperations() {
         onClose.run();
     }
 

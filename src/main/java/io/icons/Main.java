@@ -32,6 +32,7 @@ public class Main extends Application implements TextOptionClickListener {
         primaryStage.setOnCloseRequest(e -> onExit());
 
         mv = new MenuView(pg);
+        pg.getGameListener().onPlayerWin();
     }
 
     /**
