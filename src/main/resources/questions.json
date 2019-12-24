@@ -1,19 +1,40 @@
-{
-  "id": 1,
-  "name": "My test question 2",
-  "correctAnswer": 1,
-  "answers": [
-    {
-      "id": 0,
-      "name": "Answer 1"
-    },
-    {
-      "id": 1,
-      "name": "Answer 2 CORRECT"
-    },
-    {
-      "id": 2,
-      "name": "Answer 3"
-    }
-  ]
-}
+[
+  {
+    "id": 0,
+    "name": "My test question 1",
+    "correctAnswer": 2,
+    "answers": [
+      {
+        "id": 0,
+        "name": "Answer 1"
+      },
+      {
+        "id": 1,
+        "name": "Answer 2"
+      },
+      {
+        "id": 2,
+        "name": "Answer 3 CORRECT"
+      }
+    ]
+  },
+  {
+    "id": 1,
+    "name": "My test question 2",
+    "correctAnswer": 1,
+    "answers": [
+      {
+        "id": 0,
+        "name": "Answer 1"
+      },
+      {
+        "id": 1,
+        "name": "Answer 2 CORRECT"
+      },
+      {
+        "id": 2,
+        "name": "Answer 3"
+      }
+    ]
+  }
+]

@@ -1,11 +1,18 @@
 package io.icons.repository;
 
+import com.fasterxml.jackson.core.JsonFactory;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
 public class QuestionRepository {
+
+    public static final String QUESTIONS_JSON = "./src/main/resources/questions.json";
 
     private List<Question> questions = new ArrayList<>();
     private List<Question> viewedQuestions = new ArrayList<>();
@@ -30,17 +37,20 @@ public class QuestionRepository {
         return question;
     }
 
-    public static void main(String[] args) {
-        buildRepository();
-
+    private QuestionRepository init() {
+        ObjectMapper objectMapper = new ObjectMapper();
+        File file = new File(QUESTIONS_JSON);
+        try {
+            JsonParser jsonParser = new JsonFactory().createParser(file);
+            Question[] questionsArray = objectMapper.readValue(jsonParser, Question[].class);
+            questions.addAll(Arrays.asList(questionsArray));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return this;
     }
+
     public static QuestionRepository buildRepository() {
-        //TODO fill QuestionRepository with questions
-        File directory = new File("./");
-        File file = new File("questions.json");
-
-        System.out.println(directory.getAbsolutePath());
-        return new QuestionRepository();
+        return (new QuestionRepository()).init();
     }
-
 }
