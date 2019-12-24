@@ -6,6 +6,7 @@ public class Question {
 
     private int id;
     private String name;
+    private String hint;
     private int correctAnswer;
     private List<Answer> answers;
 
@@ -23,6 +24,14 @@ public class Question {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getHint() {
+        return hint;
+    }
+
+    public void setHint(String hint) {
+        this.hint = hint;
     }
 
     public void setCorrectAnswer(int correctAnswer) {
@@ -52,6 +61,7 @@ public class Question {
         return "Question{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", hint='" + hint + '\'' +
                 ", correctAnswer=" + correctAnswer +
                 ", answers=" + answers +
                 '}';
