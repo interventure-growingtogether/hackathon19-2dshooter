@@ -39,18 +39,17 @@ public class QuestionRepository {
         return question;
     }
 
+    public static void main(String[] args) {
+        buildRepository();
+
+    }
     public static QuestionRepository buildRepository() {
         //TODO fill QuestionRepository with questions
+        File directory = new File("./");
+        File file = new File("questions.json");
+
+        System.out.println(directory.getAbsolutePath());
         return new QuestionRepository();
     }
 
-    public static void main(String[] args) {
-
-        //initialize();
-
-    }
-
-    private static void initialize() throws FileNotFoundException {
-        ObjectMapper mapper = new ObjectMapper();
-    }
 }
