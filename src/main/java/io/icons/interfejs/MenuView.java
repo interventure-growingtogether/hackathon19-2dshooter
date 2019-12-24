@@ -35,7 +35,7 @@ public class MenuView extends DialogView {
         playAgain.setFont(Font.font("Verdana", 50));
         playAgain.setFill(Color.WHITE);
 
-        playAgain.setStroke(Color.BLUE);
+        playAgain.setStroke(Color.YELLOWGREEN);
         playAgain.setStrokeWidth(1);
 
         playAgain.setTranslateX(-playAgain.getBoundsInLocal().getWidth() / 2);
@@ -51,7 +51,7 @@ public class MenuView extends DialogView {
         exit.setFont(Font.font("Verdana", 50));
         exit.setFill(Color.WHITE);
 
-        exit.setStroke(Color.BLUE);
+        exit.setStroke(Color.YELLOWGREEN);
         exit.setStrokeWidth(1);
 
         exit.setTranslateX(-exit.getBoundsInLocal().getWidth() / 2);
@@ -67,7 +67,7 @@ public class MenuView extends DialogView {
         message.setFont(Font.font("Verdana", 50));
         message.setFill(Color.YELLOW);
 
-        message.setStroke(Color.BLUE);
+        message.setStroke(Color.YELLOWGREEN);
         message.setStrokeWidth(1);
 
         message.setTranslateX(-message.getBoundsInLocal().getWidth() / 2);

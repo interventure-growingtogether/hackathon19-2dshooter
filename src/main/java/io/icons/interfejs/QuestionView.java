@@ -51,7 +51,7 @@ public class QuestionView extends DialogView {
     }
 
     private void initTextField(String textContent) {
-        Text textField = createTextField(textContent, Color.WHITE, Color.BLUE);
+        Text textField = createTextField(textContent, Color.WHITE, Color.YELLOWGREEN);
         getChildren().add(textField);
 
         textField.setOnMouseEntered(e -> textField.setUnderline(true));
@@ -96,7 +96,7 @@ public class QuestionView extends DialogView {
 
         double height = textField.getBoundsInLocal().getHeight();
         double offset = textFields.isEmpty()
-            ? 5 + height / 2 - (getLayoutBounds().getHeight() / 2)
+            ? 15 + height / 2 - (getLayoutBounds().getHeight() / 2)
             : offsetJustBelowLastTextField();
         textField.setTranslateY(offset);
         textField.setTranslateX(-textField.getBoundsInLocal().getWidth() / 2);

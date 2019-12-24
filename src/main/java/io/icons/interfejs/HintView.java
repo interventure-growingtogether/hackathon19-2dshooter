@@ -60,7 +60,7 @@ public class HintView extends DialogView {
         this.hintTextField.setFont(Font.font("Verdana", 36));
         this.hintTextField.setFill(Color.WHITE);
 
-        this.hintTextField.setStroke(Color.BLUE);
+        this.hintTextField.setStroke(Color.YELLOWGREEN);
         this.hintTextField.setStrokeWidth(1);
 
         this.hintTextField.setTranslateX(-this.hintTextField.getBoundsInLocal().getWidth() / 2);
