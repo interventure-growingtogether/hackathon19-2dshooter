@@ -49,7 +49,7 @@ public class PlatformerGame extends GameEngine {
     public static final int ENEMY_WIDTH = 100;
     public static final int ENEMY_HEIGHT = /*80*/ 100;
 
-    public static final String TITLE = "Platformer";
+    public static final String TITLE = "IVformer";
 
     public static final double ENEMY_SPEED = 2.5f;
 

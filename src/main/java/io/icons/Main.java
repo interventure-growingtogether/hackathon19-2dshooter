@@ -80,10 +80,10 @@ public class Main extends Application implements TextOptionClickListener {
 
     @Override public void onSelection(final Text textOption) {
         switch (textOption.getText()) {
-            case "Play platformer":
+            case "Play IVformer":
                 onPlay();
                 break;
-            case "Exit platformer":
+            case "Exit IVformer":
             default:
                 onExit();
                 break;

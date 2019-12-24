@@ -31,7 +31,7 @@ public class MenuView extends DialogView {
 
     private void initPlayAgain() {
         playAgain = new Text();
-        playAgain.setText("Play platformer");
+        playAgain.setText("Play IVformer");
         playAgain.setFont(Font.font("Verdana", 50));
         playAgain.setFill(Color.WHITE);
 
@@ -47,7 +47,7 @@ public class MenuView extends DialogView {
 
     private void initExit() {
         exit = new Text();
-        exit.setText("Exit platformer");
+        exit.setText("Exit IVformer");
         exit.setFont(Font.font("Verdana", 50));
         exit.setFill(Color.WHITE);
 

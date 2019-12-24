@@ -6,12 +6,12 @@
 package io.icons.interfejs;
 
 import io.icons.PlatformerGame;
+import io.icons.repository.Question;
 import io.icons.repository.QuestionRepository;
 import io.icons.util.StringUtils;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import javafx.util.Pair;
 
 import java.util.Collections;
 import java.util.LinkedList;
@@ -23,18 +23,18 @@ import java.util.stream.Collectors;
  */
 public class HintView extends DialogView {
 
-    private static final LinkedList<Pair<String, String>> HINTS;
+    private static final LinkedList<String> HINTS;
 
     static {
         QuestionRepository repository = QuestionRepository.buildRepository();
         HINTS = repository.getQuestions().stream()
-                .map(q -> new Pair<>(q.getName(), q.getHint()))
+                .map(Question::getHint)
                 .collect(Collectors.toCollection(LinkedList::new));
         Collections.shuffle(HINTS);
     }
 
     Text hintTextField;
-    private Pair<String, String> hint;
+    private String hintText;
 
     public static void showIn(PlatformerGame game) {
         if (!HINTS.isEmpty()) {
@@ -42,9 +42,9 @@ public class HintView extends DialogView {
         }
     }
 
-    public HintView(final PlatformerGame pg, Pair<String, String> hint) {
+    public HintView(final PlatformerGame pg, String hintText) {
         super(pg);
-        this.hint = hint;
+        this.hintText = StringUtils.asFixedLengthLines(hintText);
 
         pg.setPaused(true);
         initHintTextField();
@@ -55,7 +55,7 @@ public class HintView extends DialogView {
 
     private void initHintTextField() {
         this.hintTextField = new Text();
-        this.hintTextField.setText(hintText());
+        this.hintTextField.setText(hintText);
 
         this.hintTextField.setFont(Font.font("Verdana", 36));
         this.hintTextField.setFill(Color.WHITE);
@@ -66,12 +66,6 @@ public class HintView extends DialogView {
         this.hintTextField.setTranslateX(-this.hintTextField.getBoundsInLocal().getWidth() / 2);
         this.hintTextField.setTranslateY(-this.hintTextField.getBoundsInLocal().getHeight() / 2);
         getChildren().add(this.hintTextField);
-    }
-
-    private String hintText() {
-        return StringUtils.asFixedLengthLines(hint.getKey())
-                + "\n\n" +
-                StringUtils.asFixedLengthLines(hint.getValue());
     }
 
     @Override
