@@ -4,13 +4,14 @@
  * and open the template in the editor.
  */
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 import cameras.Camera;
 import gameengine.GameEngine;
 import gameengine.Sprite;
 import interfejs.GameView;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 import javafx.animation.Interpolator;
 import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
@@ -19,19 +20,8 @@ import javafx.scene.Scene;
 import javafx.util.Duration;
 import levels.LevelBuilder;
 import levels.Levels;
-import sprites.Background;
-import sprites.Bird;
-import sprites.Bullet;
-import sprites.Cloud;
-import sprites.Coin;
-import sprites.Enemy;
-import sprites.Munition;
-import sprites.Player;
-import sprites.parallax.Hill;
-import sprites.parallax.Mountain;
-import sprites.parallax.ParallaxLevel;
-import sprites.parallax.ParallaxSprite;
-import sprites.parallax.Three;
+import sprites.*;
+import sprites.parallax.*;
 
 /**
  *
@@ -52,6 +42,8 @@ public class PlatformerGame extends GameEngine {
 
     public static final double ENEMY_SPEED = 2.5f;
 
+    private static final Random RND = new Random();
+
     private double time = 0, gameTime = 180; // game time in seconds
 
     private Player player;
@@ -65,10 +57,9 @@ public class PlatformerGame extends GameEngine {
     PlatformerGameListener pf;
 
     List<ParallaxSprite> parallaxSprites = new ArrayList<>();
-    
+
     Scene scene;
 
-    private static final Random RND = new Random();
     Main main;
 
     public PlatformerGame(Main main) {
@@ -94,52 +85,58 @@ public class PlatformerGame extends GameEngine {
         camera.getChildren().addAll(sprites);
         root.getChildren().addAll(bg, camera, gv);
 
-        {
-            List<Sprite> levelSprites = LevelBuilder.generate(Levels.LEVEL_1);
-            levelSprites.forEach(s -> {
-                s.setTranslateY(s.getTranslateY() + WINDOW_HEIGHT);
+        List<Sprite> levelSprites = LevelBuilder.generate(Levels.LEVEL_1);
+        levelSprites.forEach(s -> {
+            s.setTranslateY(s.getTranslateY() + WINDOW_HEIGHT);
 
-                if (s instanceof Coin) {
-                    Coin c = ((Coin) s);
-                    c.setListener(pf);
+            if (s instanceof Coin) {
+                Coin c = ((Coin) s);
+                c.setListener(pf);
 
-                    ScaleTransition st = new ScaleTransition(Duration.millis(1500), c);
-                    st.setFromX(-1);
-                    st.setToX(1);
+                ScaleTransition st = new ScaleTransition(Duration.millis(1500), c);
+                st.setFromX(-1);
+                st.setToX(1);
 
-                    st.setCycleCount(ScaleTransition.INDEFINITE);
-                    st.setInterpolator(Interpolator.LINEAR);
-                    st.setAutoReverse(true);
-                    st.play();
+                st.setCycleCount(ScaleTransition.INDEFINITE);
+                st.setInterpolator(Interpolator.LINEAR);
+                st.setAutoReverse(true);
+                st.play();
 
-                    TranslateTransition tr = new TranslateTransition(Duration.millis(1500), c);
-                    tr.setToY(c.getTranslateY() - 40);
+                TranslateTransition tr = new TranslateTransition(Duration.millis(1500), c);
+                tr.setToY(c.getTranslateY() - 40);
 
-                    tr.setCycleCount(ScaleTransition.INDEFINITE);
-                    tr.setInterpolator(Interpolator.LINEAR);
-                    tr.setAutoReverse(true);
-                    tr.play();
-                }
+                tr.setCycleCount(ScaleTransition.INDEFINITE);
+                tr.setInterpolator(Interpolator.LINEAR);
+                tr.setAutoReverse(true);
+                tr.play();
+            }
 
-                if (s instanceof Munition) {
-                    ((Munition) s).setListener(pf);
-                }
+            if (s instanceof Munition) {
+                ((Munition) s).setListener(pf);
+            }
 
-                if (s instanceof Enemy) {
-                    ((Enemy) s).setListener(pf);
-                }
-                
+            if (s instanceof Enemy) {
+                ((Enemy) s).setListener(pf);
+            }
+            
 
-            });
+        });
 
-            getSpriteContainer().addSprites(levelSprites);
-            sprites.getChildren().addAll(levelSprites);
-        }
+        getSpriteContainer().addSprites(levelSprites);
+        sprites.getChildren().addAll(levelSprites);
 
         createPlayer();
 
         createScene();
 
+    }
+
+    public Main getMain() {
+        return main;
+    }
+
+    public PlatformerGameListener getGameListener() {
+        return pf;
     }
 
     protected void createPlayer() {
@@ -155,7 +152,7 @@ public class PlatformerGame extends GameEngine {
         scene.setOnKeyPressed(player);
         scene.setOnKeyReleased(player);
         scene.setOnMouseClicked(ev -> {
-            if (pf.getMunitionCount() > 0) {
+            if (!paused && pf.getMunitionCount() > 0) {
                 pf.addMunition(-1);
 
                 Bullet b = new Bullet();
@@ -332,7 +329,6 @@ public class PlatformerGame extends GameEngine {
     @Override
     protected void updateSprites() {
         super.updateSprites();
-
         time += 1. / 60;
 
         int min = ((int) gameTime - (int) time) / 60;
@@ -346,7 +342,29 @@ public class PlatformerGame extends GameEngine {
 
         camera.setTranslateX(WINDOW_WIDTH / 2 - player.getTranslateX());
         camera.setTranslateY(WINDOW_HEIGHT / 2 - player.getTranslateY());
-        
+
+        parallaxSprites.forEach(ps -> {
+            ps.setCurrentPlayerX(player.getTranslateX());
+            ps.update();
+        });
+    }
+    
+    private void doUpdateSprites() {
+        super.updateSprites();
+        time += 1. / 60;
+
+        int min = ((int) gameTime - (int) time) / 60;
+        int sec = ((int) gameTime - (int) time) % 60;
+        gv.setTime(min, sec);
+
+        if (min <= 0 && sec <= 0) {
+            pf.setPointsCount(0);
+            stopGame();
+        }
+
+        camera.setTranslateX(WINDOW_WIDTH / 2 - player.getTranslateX());
+        camera.setTranslateY(WINDOW_HEIGHT / 2 - player.getTranslateY());
+
         parallaxSprites.forEach(ps -> {
             ps.setCurrentPlayerX(player.getTranslateX());
             ps.update();

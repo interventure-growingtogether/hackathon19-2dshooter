@@ -5,15 +5,10 @@
  */
 package sprites;
 
+import java.util.stream.Stream;
+
 import gameengine.Sprite;
-import javafx.animation.Interpolator;
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.RotateTransition;
-import javafx.animation.ScaleTransition;
-import javafx.animation.Timeline;
-import javafx.animation.Transition;
-import javafx.animation.TranslateTransition;
+import javafx.animation.*;
 import javafx.event.EventHandler;
 import javafx.geometry.Bounds;
 import javafx.scene.image.Image;
@@ -156,25 +151,37 @@ public class Player extends Sprite implements EventHandler<KeyEvent> {
     // executed on keyboard input to perform particular actions
     @Override
     public void handle(KeyEvent event) {
-        if (event.getCode() == KeyCode.D && event.getEventType() == KeyEvent.KEY_PRESSED) {
+        if (isPressed(event, KeyCode.D, KeyCode.RIGHT)) {
             state.rightPressed();
-        } else if (event.getCode() == KeyCode.D && event.getEventType() == KeyEvent.KEY_RELEASED) {
+        } else if (isReleased(event, KeyCode.D, KeyCode.RIGHT)) {
             state.rightReleased();
-        } else if (event.getCode() == KeyCode.A && event.getEventType() == KeyEvent.KEY_PRESSED) {
+        } else if (isPressed(event, KeyCode.A, KeyCode.LEFT)) {
             state.leftPressed();
-        } else if (event.getCode() == KeyCode.A && event.getEventType() == KeyEvent.KEY_RELEASED) {
+        } else if (isReleased(event, KeyCode.A, KeyCode.LEFT)) {
             state.leftReleased();
-        } else if (event.getCode() == KeyCode.SPACE && event.getEventType() == KeyEvent.KEY_PRESSED) {
+        } else if (isPressed(event, KeyCode.SPACE, KeyCode.W, KeyCode.UP)) {
             state.jumpPressed();
-        } else if (event.getCode() == KeyCode.SPACE && event.getEventType() == KeyEvent.KEY_RELEASED) {
+        } else if (isReleased(event, KeyCode.SPACE, KeyCode.W, KeyCode.UP)) {
             state.jumpReleased();
-        } else if (event.getCode() == KeyCode.DIGIT1 && event.getEventType() == KeyEvent.KEY_PRESSED) {
+        } else if (isPressed(event, KeyCode.DIGIT1)) {
 
-        } else if (event.getCode() == KeyCode.DIGIT2 && event.getEventType() == KeyEvent.KEY_PRESSED) {
+        } else if (isPressed(event, KeyCode.DIGIT2)) {
 
-        } else if (event.getCode() == KeyCode.DIGIT3 && event.getEventType() == KeyEvent.KEY_PRESSED) {
+        } else if (isPressed(event, KeyCode.DIGIT3)) {
 
         }
+    }
+
+    private boolean isPressed(final KeyEvent event, KeyCode... keyCodes) {
+        return event.getEventType() == KeyEvent.KEY_PRESSED && matchesAnyKey(event, keyCodes);
+    }
+
+    private boolean matchesAnyKey(final KeyEvent event, final KeyCode... keyCodes) {
+        return Stream.of(keyCodes).anyMatch(kc -> event.getCode() == kc);
+    }
+
+    private boolean isReleased(final KeyEvent event, KeyCode... keyCodes) {
+        return event.getEventType() == KeyEvent.KEY_RELEASED && matchesAnyKey(event, keyCodes);
     }
 
     public void takeHit() {

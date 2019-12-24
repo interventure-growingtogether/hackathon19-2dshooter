@@ -6,13 +6,16 @@
 package gameengine;
 
 import java.util.List;
+
 import javafx.animation.AnimationTimer;
 
 /**
- *
  * @author Marko
  */
 public abstract class GameEngine {
+
+    protected boolean paused = false;
+    protected boolean quizStarted = false;
 
     private AnimationTimer timer;
     private final SpriteContainer spriteContainer = new SpriteContainer();
@@ -22,14 +25,17 @@ public abstract class GameEngine {
         timer = new AnimationTimer() {
             @Override
             public void handle(long now) {
-
-                updateSprites();
-
-                colideSprites();
-
-                cleanSprites();
+                drawScene();
             }
         };
+    }
+
+    private void drawScene() {
+        if (!paused && !quizStarted) {
+            updateSprites();
+            colideSprites();
+            cleanSprites();
+        }
     }
 
     public void startGame() {
@@ -40,10 +46,18 @@ public abstract class GameEngine {
         timer.stop();
     }
 
+    public void setPaused(final boolean paused) {
+        this.paused = paused;
+    }
+
+    public void setQuizStarted(final boolean quizStarted) {
+        this.quizStarted = quizStarted;
+    }
+
     protected void updateSprites() {
         spriteContainer
                 .getSprites()
-                .forEach(s -> s.update());
+                .forEach(Sprite::update);
     }
 
     protected void colideSprites() {

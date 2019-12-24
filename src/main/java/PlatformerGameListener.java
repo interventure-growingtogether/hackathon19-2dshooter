@@ -4,27 +4,41 @@
  * and open the template in the editor.
  */
 
-import gameengine.GameEngine;
+import java.util.Deque;
+import java.util.LinkedList;
+import java.util.concurrent.LinkedBlockingDeque;
+
 import interfejs.GameView;
-import sprites.Coin;
-import sprites.Enemy;
-import sprites.Munition;
-import sprites.Player;
+import interfejs.HintView;
+import interfejs.QuestionView;
+import javafx.application.Platform;
+import repository.Question;
+import repository.QuestionRepository;
+import sprites.Coin.CoinPickupListener;
+import sprites.Enemy.EnemyHitListener;
+import sprites.Player.PlayerHitListener;
+
+import static sprites.Munition.MunitionPickupListener;
 
 /**
- *
  * @author Marko
  */
-public class PlatformerGameListener implements Munition.MunitionPickupListener, Coin.CoinPickupListener, Player.PlayerHitListener, Enemy.EnemyHitListener {
+public class PlatformerGameListener
+    implements MunitionPickupListener, CoinPickupListener, PlayerHitListener, EnemyHitListener {
 
+    private final Deque<Question> questions;
     private GameView gv;
-    private GameEngine ge;
+    private PlatformerGame ge;
 
     private int munitionCount, livesCount = 3, pointsCount;
 
-    public PlatformerGameListener(GameView gv, GameEngine ge) {
+    public PlatformerGameListener(GameView gv, PlatformerGame ge) {
         this.gv = gv;
         this.ge = ge;
+
+        this.questions = new LinkedBlockingDeque<>(
+            QuestionRepository.buildRepository().getQuestions()
+        );
     }
 
     @Override
@@ -37,6 +51,7 @@ public class PlatformerGameListener implements Munition.MunitionPickupListener, 
     public void onCoinPickup(int amount) {
         pointsCount += amount;
         gv.setPoints(pointsCount);
+        HintView.showIn(ge);
     }
 
     @Override
@@ -77,15 +92,30 @@ public class PlatformerGameListener implements Munition.MunitionPickupListener, 
     public void onEnemyDie() {
         pointsCount += 5;
         gv.setPoints(pointsCount);
+        HintView.showIn(ge);
     }
 
     @Override
     public void onPlayerWin() {
-        ge.stopGame();
+        ge.setQuizStarted(true);
+        QuestionView.showIn(ge, questions.poll(), this::showNextQuestionOrEndGame);
+    }
+
+    private void showNextQuestionOrEndGame() {
+        Platform.runLater(() -> {
+            if (questions.isEmpty()) {
+                ge.stopGame();
+            } else {
+                QuestionView.showIn(ge, questions.poll(), this::showNextQuestionOrEndGame);
+            }
+        });
     }
 
     void setPointsCount(int i) {
         pointsCount = i;
     }
 
+    public void incrementPointsBy(final int increment) {
+        pointsCount += increment;
+    }
 }

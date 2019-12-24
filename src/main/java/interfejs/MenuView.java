@@ -11,36 +11,21 @@ import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import main.PlatformerGame;
 import sprites.playeranimations.SpriteSheet;
 
 /**
  *
  * @author Marko
  */
-public class MenuView extends Group {
-
-    public interface MenuListener {
-
-        public void onPlay();
-
-        public void onExit();
-    }
-
-    ImageView iv = new ImageView(SpriteSheet.getBgImage());
+public class MenuView extends DialogView {
+    
     Text playAgain, exit, message;
-    MenuListener listener;
+    TextOptionClickListener listener;
 
-    public MenuView(MenuListener listener) {
-        this.listener = listener;
-
-        iv.setViewport(new Rectangle2D(0, 0, 700, 366));
-        iv.setTranslateX(-700 / 2);
-        iv.setTranslateY(-366 / 2);
-        iv.setOpacity(0.99999);
-
-        getChildren().add(iv);
-        setTranslateX(0.5);
-        setTranslateY(0.5);
+    public MenuView(final PlatformerGame pg) {
+        super(pg);
+        this.listener = pg.getMain();
 
         initPlayAgain();
         initExit();
@@ -60,9 +45,7 @@ public class MenuView extends Group {
         playAgain.setTranslateY(-playAgain.getBoundsInLocal().getHeight() / 2);
         getChildren().add(playAgain);
 
-        playAgain.setOnMouseClicked(e -> {
-            listener.onPlay();
-        });
+        playAgain.setOnMouseClicked(e -> listener.onSelection(playAgain));
     }
 
     private void initExit() {
@@ -78,9 +61,7 @@ public class MenuView extends Group {
         exit.setTranslateY(exit.getBoundsInLocal().getHeight());
         getChildren().add(exit);
 
-        exit.setOnMouseClicked(e -> {
-            listener.onExit();
-        });
+        exit.setOnMouseClicked(e -> listener.onSelection(exit));
     }
 
     private void initMessage() {

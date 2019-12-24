@@ -4,15 +4,16 @@
  * and open the template in the editor.
  */
 import interfejs.MenuView;
+import interfejs.TextOptionClickListener;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
- *
  * @author mile
  */
-public class Main extends Application implements MenuView.MenuListener {
+public class Main extends Application implements TextOptionClickListener {
 
     PlatformerGame pg;
     MenuView mv;
@@ -30,12 +31,9 @@ public class Main extends Application implements MenuView.MenuListener {
         primaryStage.setMinWidth(PlatformerGame.WINDOW_WIDTH);
         primaryStage.show();
         primaryStage.setResizable(false);
+        primaryStage.setOnCloseRequest(e -> onExit());
 
-        mv = new MenuView(this);
-        mv.setTranslateX(pg.getScene().getWidth() / 2);
-        mv.setTranslateY(pg.getScene().getHeight() / 2);
-        pg.getRoot().getChildren().add(mv);
-
+        mv = new MenuView(pg);
     }
 
     /**
@@ -45,7 +43,8 @@ public class Main extends Application implements MenuView.MenuListener {
         launch(args);
     }
 
-    @Override
+
+
     public void onPlay() {
         pg.getRoot().getChildren().remove(mv);
 
@@ -57,7 +56,7 @@ public class Main extends Application implements MenuView.MenuListener {
             primaryStage.show();
             primaryStage.setResizable(false);
 
-            mv = new MenuView(this);
+            mv = new MenuView(pg);
             mv.setTranslateX(pg.getScene().getWidth() / 2);
             mv.setTranslateY(pg.getScene().getHeight() / 2);
         } else {
@@ -67,19 +66,29 @@ public class Main extends Application implements MenuView.MenuListener {
         pg.startGame();
     }
 
-    @Override
     public void onExit() {
-        Platform.exit();
+        System.exit(0);
     }
 
     public void gameFinished(int result) {
-        if(result>0){
+        if (result > 0) {
             mv.setMessage("You won " + result + " points");
         } else {
-           mv.setMessage("You lost :-(");
+            mv.setMessage("You lost :-(");
         }
-        
+
         pg.getRoot().getChildren().add(mv);
     }
 
+    @Override public void onSelection(final Text textOption) {
+        switch (textOption.getText()) {
+            case "Play platformer":
+                onPlay();
+                break;
+            case "Exit platformer":
+            default:
+                onExit();
+                break;
+        }
+    }
 }

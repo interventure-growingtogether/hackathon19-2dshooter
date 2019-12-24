@@ -6,7 +6,6 @@
 package gameengine;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -17,40 +16,40 @@ import java.util.Set;
  */
 public class SpriteContainer {
 
-    private final List<Sprite> SPRITES = new ArrayList<Sprite>();
-    private final Set DEAD_SPRITES = new HashSet();
+    private final List<Sprite> sprites = new ArrayList<Sprite>();
+    private final Set<Sprite> deadSprites = new HashSet<>();
 
     public List<Sprite> getSprites() {
-        return SPRITES;
+        return sprites;
     }
 
     public void addSprites(List<Sprite> sprites) {
-        SPRITES.addAll(sprites);
+        this.sprites.addAll(sprites);
     }
 
     public void addSprite(Sprite sprite) {
-        SPRITES.add(sprite);
+        sprites.add(sprite);
     }
 
     public void removeSprites(List<Sprite> sprites) {
-        SPRITES.removeAll(sprites);
+        this.sprites.removeAll(sprites);
     }
 
     public void removeSprite(Sprite sprite) {
-        SPRITES.remove(sprite);
+        sprites.remove(sprite);
     }
 
     public void addDeadSprite(Sprite sprite) {
-        DEAD_SPRITES.add(sprite);
+        deadSprites.add(sprite);
     }
 
     public void addDeadSprites(List<Sprite> sprites) {
-        DEAD_SPRITES.addAll(sprites);
+        deadSprites.addAll(sprites);
     }
 
     public void cleanDeadSprites() {
-        SPRITES.removeAll(DEAD_SPRITES);
-        DEAD_SPRITES.clear();
+        sprites.removeAll(deadSprites);
+        deadSprites.clear();
     }
 
 }
