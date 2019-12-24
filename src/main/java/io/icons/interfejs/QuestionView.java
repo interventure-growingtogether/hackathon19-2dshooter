@@ -5,11 +5,6 @@
  */
 package io.icons.interfejs;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
 import io.icons.PlatformerGame;
 import io.icons.repository.Answer;
 import io.icons.repository.Question;
@@ -17,6 +12,11 @@ import javafx.application.Platform;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author Marko

@@ -1,14 +1,14 @@
 package io.icons.interfejs;
 
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-
 import io.icons.PlatformerGame;
+import io.icons.sprites.playeranimations.SpriteSheet;
 import javafx.application.Platform;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
 import javafx.scene.image.ImageView;
-import io.icons.sprites.playeranimations.SpriteSheet;
+
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 
 public class DialogView extends Group {
     public static final ScheduledExecutorService POOL;

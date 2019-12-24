@@ -1,7 +1,7 @@
 package io.icons.sprites;
 
-import javafx.scene.image.ImageView;
 import io.icons.sprites.playeranimations.SpriteSheet;
+import javafx.scene.image.ImageView;
 
 public class IvLogo extends ImageView {
 

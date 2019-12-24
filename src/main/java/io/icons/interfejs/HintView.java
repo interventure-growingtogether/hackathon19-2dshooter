@@ -5,29 +5,30 @@
  */
 package io.icons.interfejs;
 
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
-
 import io.icons.PlatformerGame;
+import io.icons.repository.QuestionRepository;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import io.icons.repository.QuestionRepository;
+
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 /**
  * @author Marko
  */
 public class HintView extends DialogView {
 
-    private static final Queue<String> HINTS;
+    private static final LinkedList<String> HINTS;
 
     static {
         QuestionRepository repository = QuestionRepository.buildRepository();
         HINTS = repository.getQuestions().stream()
             .map(q -> q.getName() + "\n" + q.getCorrectAnswer().getName())
             .collect(Collectors.toCollection(LinkedList::new));
+        Collections.shuffle(HINTS);
     }
 
     Text hintTextField;

@@ -6,16 +6,17 @@
 package io.icons.levels;
 
 import io.icons.gameengine.Sprite;
-import java.util.ArrayList;
-import java.util.List;
+import io.icons.sprites.FloorBlock;
+import io.icons.sprites.FloorHole;
+import io.icons.sprites.GroundStaff;
 import javafx.scene.paint.Color;
 import javafx.scene.transform.Scale;
 import javafx.scene.transform.Translate;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static io.icons.levels.LevelElements.*;
-import io.icons.sprites.GroundStaff;
-import io.icons.sprites.FloorBlock;
-import io.icons.sprites.FloorHole;
 
 /**
  * Graditelj ^Fabricki metod

@@ -6,9 +6,10 @@
 package io.icons.levels;
 
 import io.icons.gameengine.Sprite;
+import io.icons.sprites.EndSprite;
+
 import static io.icons.levels.LevelElements.END;
 import static io.icons.levels.LevelElements.END_MASK;
-import io.icons.sprites.EndSprite;
 
 /**
  *

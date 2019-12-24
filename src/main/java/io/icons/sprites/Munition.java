@@ -6,8 +6,9 @@
 package io.icons.sprites;
 
 import io.icons.gameengine.Sprite;
-import java.util.Random;
 import io.icons.sprites.playeranimations.Axe;
+
+import java.util.Random;
 
 /**
  *

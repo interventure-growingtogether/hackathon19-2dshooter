@@ -6,11 +6,12 @@
 package io.icons.sprites;
 
 import io.icons.gameengine.Sprite;
+import javafx.scene.transform.Scale;
+import javafx.scene.transform.Translate;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import javafx.scene.transform.Scale;
-import javafx.scene.transform.Translate;
 
 /**
  *

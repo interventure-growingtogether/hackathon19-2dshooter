@@ -7,7 +7,9 @@ package io.icons.sprites;
 
 import io.icons.gameengine.Sprite;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.*;
+import javafx.scene.shape.Polygon;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.StrokeType;
 
 /**
  *

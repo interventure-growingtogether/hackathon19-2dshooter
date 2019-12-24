@@ -4,24 +4,35 @@ package io.icons;/*
  * and open the template in the editor.
  */
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
 import io.icons.cameras.Camera;
 import io.icons.gameengine.GameEngine;
 import io.icons.gameengine.Sprite;
 import io.icons.interfejs.GameView;
+import io.icons.levels.LevelBuilder;
+import io.icons.levels.Levels;
+import io.icons.sprites.Background;
+import io.icons.sprites.Bird;
+import io.icons.sprites.Bullet;
+import io.icons.sprites.Cloud;
+import io.icons.sprites.Coin;
+import io.icons.sprites.Enemy;
+import io.icons.sprites.Munition;
+import io.icons.sprites.Player;
+import io.icons.sprites.parallax.Hill;
+import io.icons.sprites.parallax.Mountain;
+import io.icons.sprites.parallax.ParallaxLevel;
+import io.icons.sprites.parallax.ParallaxSprite;
+import io.icons.sprites.parallax.Three;
 import javafx.animation.Interpolator;
 import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.util.Duration;
-import io.icons.levels.LevelBuilder;
-import io.icons.levels.Levels;
-import io.icons.sprites.*;
-import io.icons.sprites.parallax.*;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 /**
  *

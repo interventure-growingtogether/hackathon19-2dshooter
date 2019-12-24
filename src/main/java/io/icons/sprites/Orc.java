@@ -6,13 +6,14 @@
 package io.icons.sprites;
 
 import io.icons.gameengine.Sprite;
-import java.util.Random;
+import io.icons.sprites.playeranimations.SpriteSheet;
 import javafx.animation.Interpolator;
 import javafx.animation.Transition;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
-import io.icons.sprites.playeranimations.SpriteSheet;
+
+import java.util.Random;
 
 /**
  *

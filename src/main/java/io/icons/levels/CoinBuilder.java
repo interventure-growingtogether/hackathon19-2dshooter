@@ -6,15 +6,17 @@
 package io.icons.levels;
 
 import io.icons.gameengine.Sprite;
-import java.util.Random;
+import io.icons.sprites.Coin;
 import javafx.animation.Interpolator;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.util.Duration;
+
+import java.util.Random;
+
 import static io.icons.levels.LevelElements.COIN;
 import static io.icons.levels.LevelElements.COIN_MASK;
-import io.icons.sprites.Coin;
 
 /**
  *

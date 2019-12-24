@@ -6,10 +6,12 @@
 package io.icons.levels;
 
 import io.icons.gameengine.Sprite;
+import io.icons.sprites.Munition;
+
 import java.util.Random;
+
 import static io.icons.levels.LevelElements.MUNITION;
 import static io.icons.levels.LevelElements.MUNITION_MASK;
-import io.icons.sprites.Munition;
 
 /**
  *

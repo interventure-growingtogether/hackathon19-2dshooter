@@ -5,8 +5,8 @@
  */
 package io.icons.sprites.playerstates;
 
-import javafx.geometry.Rectangle2D;
 import io.icons.sprites.Player;
+import javafx.geometry.Rectangle2D;
 
 /**
  *

@@ -5,9 +5,9 @@
  */
 package io.icons.gameengine;
 
-import java.util.List;
-
 import javafx.animation.AnimationTimer;
+
+import java.util.List;
 
 /**
  * @author Marko

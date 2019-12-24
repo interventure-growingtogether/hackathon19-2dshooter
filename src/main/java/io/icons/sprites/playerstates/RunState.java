@@ -5,11 +5,11 @@
  */
 package io.icons.sprites.playerstates;
 
+import io.icons.sprites.Player;
 import javafx.animation.Interpolator;
 import javafx.animation.Transition;
 import javafx.geometry.Rectangle2D;
 import javafx.util.Duration;
-import io.icons.sprites.Player;
 
 /**
  *

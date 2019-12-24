@@ -5,10 +5,22 @@
  */
 package io.icons.sprites;
 
-import java.util.stream.Stream;
-
 import io.icons.gameengine.Sprite;
-import javafx.animation.*;
+import io.icons.sprites.playeranimations.SpriteSheet;
+import io.icons.sprites.playerstates.DeadState;
+import io.icons.sprites.playerstates.FallState;
+import io.icons.sprites.playerstates.IdleState;
+import io.icons.sprites.playerstates.JumpState;
+import io.icons.sprites.playerstates.RunState;
+import io.icons.sprites.playerstates.State;
+import javafx.animation.Interpolator;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.RotateTransition;
+import javafx.animation.ScaleTransition;
+import javafx.animation.Timeline;
+import javafx.animation.Transition;
+import javafx.animation.TranslateTransition;
 import javafx.event.EventHandler;
 import javafx.geometry.Bounds;
 import javafx.scene.image.Image;
@@ -16,8 +28,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.util.Duration;
-import io.icons.sprites.playeranimations.SpriteSheet;
-import io.icons.sprites.playerstates.*;
+
+import java.util.stream.Stream;
 
 /**
  *

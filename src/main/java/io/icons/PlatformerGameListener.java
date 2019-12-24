@@ -4,18 +4,18 @@ package io.icons;/*
  * and open the template in the editor.
  */
 
-import java.util.Deque;
-import java.util.concurrent.LinkedBlockingDeque;
-
 import io.icons.interfejs.GameView;
 import io.icons.interfejs.HintView;
 import io.icons.interfejs.QuestionView;
-import javafx.application.Platform;
 import io.icons.repository.Question;
 import io.icons.repository.QuestionRepository;
 import io.icons.sprites.Coin.CoinPickupListener;
 import io.icons.sprites.Enemy.EnemyHitListener;
 import io.icons.sprites.Player.PlayerHitListener;
+import javafx.application.Platform;
+
+import java.util.Deque;
+import java.util.concurrent.LinkedBlockingDeque;
 
 import static io.icons.sprites.Munition.MunitionPickupListener;
 

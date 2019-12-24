@@ -5,13 +5,13 @@
  */
 package io.icons.interfejs;
 
+import io.icons.sprites.Coin;
+import io.icons.sprites.playeranimations.Axe;
+import io.icons.sprites.playeranimations.Live;
 import javafx.scene.Group;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import io.icons.sprites.Coin;
-import io.icons.sprites.playeranimations.Axe;
-import io.icons.sprites.playeranimations.Live;
 
 /**
  *
